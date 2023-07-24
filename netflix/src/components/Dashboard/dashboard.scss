@@ -1,0 +1,129 @@
+
+.Imagebox{
+  height : 100px;
+  width : 100px;
+  img{
+    height : 100%;
+    width : 100%;
+    padding: none;
+    background-position: fixed;
+    object-fit: cover;
+    margin-right: 0;
+    margin-left: 0;
+    background-repeat: no-repeat;
+    justify-content: center;
+    display: flex;
+  }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black; /* Set the background color of the entire page to black */
+  }
+
+.button{
+    .left{
+        margin-right: 10px;
+        color: red;
+        text-decoration: none;
+        box-shadow: 0;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: transparent;
+
+    }
+    .right{
+        margin-left: 10px;
+        color:green;
+        text-decoration: none;
+        box-shadow: 0;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: transparent;
+    }
+}
+.dashboard {
+    justify-content: space-between;
+    margin-top: 50px;
+    background-color: var(--main-color);
+  
+    .navbar {
+      background-color: var(--main-color);
+    }
+  
+    .row {
+      display: flex;
+      width: 100%;
+  
+      .col-4 {
+        background-color: var(--main-color);
+        height: 100vh;
+        width: 15%;
+        position: fixed;
+        color: white;
+        box-shadow: 2px 2px 5px 2px rgba(255, 255, 255, 0.2) !important;
+  
+        ul {
+          list-style-type: none;
+          padding: 20px 10px;
+          align-items: center;
+  
+          .button {
+            border: none;
+            background-color: transparent;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+  
+            &:hover {
+              background-color: rgba(239, 5, 5, 0.2);
+            }
+          }
+        }
+      }
+  
+      .col-8 {
+        margin-left: 15%; /* Adjust the margin to avoid overlapping with the sidebar */
+        margin-top: 20px;
+        width: 85%;
+        background-color: black;
+        padding: 20px; /* Move the padding here to prevent overlapping with the sidebar */
+  
+        .Table {
+          .AddButton{
+            margin-left: 95%;
+            margin-top: 0;
+            color: red;
+            text-decoration: none;
+            box-shadow: 0px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: transparent;
+          }
+        }
+        .chartname{
+          color:rgb(255, 130, 130);
+          justify-content: center;
+          display: flex;
+          margin-top: 100px;
+          margin-bottom: 10px;
+          font-size: 30px;
+        }
+        .DoughnutChart{
+          justify-content: center;
+          display: flex;
+  
+        }
+      }
+
+    }
+
+  }
+  
