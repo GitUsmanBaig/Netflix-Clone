@@ -38,7 +38,8 @@ const Navbar = () => {
                     <Notifications className='icon'/>
                     <img src='https://logowik.com/content/uploads/images/netflix4627.jpg' alt='' />
                     <div className='profile'>
-                        <ArrowDropDownRounded className='icon'/>
+                      { localStorage.getItem('user') ?<>
+                      <ArrowDropDownRounded className='icon'/>
                         <div className='options'>
                             <span onClick={
                                 ()=>{
@@ -48,7 +49,7 @@ const Navbar = () => {
                             <span onClick={()=>{
                                 navigate('/login');
                             }}>Logout</span>
-                        </div>
+                        </div></> :<button>Sign in</button>}
                     </div>
                 </div>
             </div>

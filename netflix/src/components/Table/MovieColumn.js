@@ -30,12 +30,6 @@ export const Movie = [
         accessor : 'rating',
     },
     {
-        Header: 'description',
-        Footer: 'description',
-        accessor: 'description',
-
-    },
-    {
         Header: 'image',
         Footer: 'image',
         accessor: 'image',

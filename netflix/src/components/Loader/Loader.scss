@@ -1,0 +1,42 @@
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loader {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%; /* Make it a circle */
+  background-color: transparent;
+  animation: spin 1s linear infinite, pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.8); /* Start with no glow */
+  }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 10px rgba(229, 9, 20, 0.8); /* Add a glowing effect */
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.8); /* End with no glow */
+  }
+}
+
+audio {
+  display: none;
+}

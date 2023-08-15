@@ -19,7 +19,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/home' exact element={<Home />} />
-          <Route path='/watch' element={<Watch />} />
+          <Route path='/watch/:id' element={<Watch />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/dashboard' element={<Dashboard />} />

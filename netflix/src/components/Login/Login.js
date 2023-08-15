@@ -34,12 +34,16 @@ const Login = () => {
             if (response.status === 200) {
                 if (fields.email === "im@dmin.com" && fields.password === "admin123") {
                     console.log(response)
+                    localStorage.setItem('user', JSON.stringify(getData.data[0].id));
+                    localStorage.setItem('role', 'admin');
                     toast.success("Logged in as admin"); // Show admin login success
                     navigate('/dashboard'); // Navigate to dashboard for admin
+
                 } else {
                     console.log(getData.data);
                     //temporary storage of data
                     localStorage.setItem('user', JSON.stringify(getData.data[0].id));
+                    localStorage.setItem('role', 'user');
                     toast.success(getData.message); // Show user login success
                     navigate('/home'); // Navigate to home for normal user
                 }

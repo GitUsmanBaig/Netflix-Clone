@@ -84,3 +84,79 @@ exports.UpdateMovie = (req, res) => {
         console.log(err);
     }
 }
+
+/*count total movies*/
+exports.CountMovies = (req, res) => {
+    try {
+        Conn.query('SELECT COUNT(*) AS TOTAL_MOVIE FROM movies', (error, results) => {
+            if (error) {
+                return res.status(422).json({ data: [], message: "Cannot Find Movies", status: 422 });
+            }
+            else{
+                return res.status(200).json({ data: results, message: "Total Movies:", status: 200 });
+            }
+        });
+    }catch (err) {
+        console.log(err);
+    }
+}
+
+
+exports.FetchMovieGenre = (req, res) => {
+    try {
+        Conn.query('SELECT DISTINCT genre FROM movies', (error, genres) => {
+            if (error) {
+                console.log(error);
+                return res.status(422).json({ data: [], message: "Cannot Find Genre", status: 422 });
+            }
+
+            const array = [];
+
+            let completedQueries = 0;
+
+            const handleQueryResult = (genre, movies) => {
+                array.push({ genre, data: movies });
+
+                completedQueries++;
+                if (completedQueries === genres.length) {
+                    return res.status(200).json({ data: array, message: "Genres Found!", status: 200 });
+                }
+            };
+
+            for (let i = 0; i < genres.length; i++) {
+                const genre = genres[i].genre;
+
+                Conn.query('SELECT * FROM movies WHERE genre = ?', [genre], (error, movies) => {
+                    if (error) {
+                        console.log(error);
+                        handleQueryResult(genre, []);
+                    } else {
+                        handleQueryResult(genre, movies);
+                    }
+                });
+            }
+        });
+    } catch (err) {
+        console.log(err);
+        return res.status(422).json({ data: [], message: "Cannot Find Genre", status: 422 });
+    }
+};
+
+
+
+
+exports.FetchMoviesWithGenre = (req, res) => {
+    try{
+        Conn.query('SELECT * FROM movies WHERE genre = ?', [req.params.genre], (error, results) => {
+            if(error){
+                return res.status(422).json({ data: [], message: "Cannot Find movies of this genre", status: 422 });
+            }
+            else{
+                return res.status(200).json({ data: results, message: "Movies Found!", status: 200 });
+            }
+        });
+
+    }catch (err) {
+        console.log(err);
+    }
+}

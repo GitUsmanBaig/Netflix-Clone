@@ -2,3 +2,12 @@
     background-color: var(--main-color);
     overflow: hidden;
 }
+
+.ListItem-enter {
+    opacity: 0;
+  }
+  
+  .ListItem-enter-active {
+    opacity: 1;
+    transition: opacity 1000ms ease-out;
+  }

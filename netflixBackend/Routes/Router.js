@@ -1,8 +1,11 @@
 const express = require('express');
 const Router = express.Router();
 const Conn = require('../db/Conn');
-const { createUser, FetchUsers, LoginUser, FetchSingleUser, DeleteUser, UpdateUser } = require('../middlewares/User');
-const { createMovie, FetchMovies, FetchSingleMovie, DeleteMovie, UpdateMovie } = require('../middlewares/Movies');
+const { createUser, FetchUsers, LoginUser, FetchSingleUser, DeleteUser, UpdateUser, CountUsers } = require('../middlewares/User');
+const { createMovie, FetchMovies, FetchSingleMovie, DeleteMovie, UpdateMovie, CountMovies, FetchMovieGenre, FetchMoviesWithGenre } = require('../middlewares/Movies');
+
+
+//----------------Users-----------------//
 
 //create user
 Router.post('/create',createUser);
@@ -22,6 +25,13 @@ Router.delete('/delete/:id', DeleteUser);
 //update user data
 Router.put('/update/:id', UpdateUser);
 
+//count total users
+Router.get('/countusers', CountUsers);
+
+
+
+//----------------Movies-----------------//
+
 //create Movie
 Router.post('/createmovie',createMovie);
 
@@ -36,6 +46,18 @@ Router.delete('/deletemovie/:id', DeleteMovie);
 
 //updatw movie data
 Router.put('/updatemovie/:id', UpdateMovie);
+
+//count total movies
+Router.get('/countmovie', CountMovies);
+
+//get movie genre
+Router.get('/getmoviegenre', FetchMovieGenre);
+
+//get movies with genre
+Router.get('/getmovieswithgenre/:genre', FetchMoviesWithGenre);
+
+//get array of moives in a genre
+// Router.get('/getmovieslistwithgenre/:genre', FetchListMoviesWithGenre);
 
 
 module.exports = Router;

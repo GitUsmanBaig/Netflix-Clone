@@ -58,8 +58,6 @@ const Featured = ({ type }) => {
                         </div>
                     )
                 }
-                {/* //set the background image with image 100% fitting the screen */}
-                {/* <img width='100%' backgroundimage={`url(https://image.tmdb.org/t/p/w500/${movie?.backdrop_path}")`} alt='' /> */}
                 <img 
                     height="100%"
                     style={{
@@ -68,8 +66,6 @@ const Featured = ({ type }) => {
                     }}
                     alt=""
                 />
-
-                {/* <img width='100%' src='https://www.highonfilms.com/wp-content/uploads/2022/11/Wednesday-2022-Netflix-Review-Ending-Explained.jpg' alt='' /> */}
                 <div className='info'>
                     {/* //set the logo image on the screen */}
                     <div className='logo'>
@@ -96,10 +92,6 @@ const Featured = ({ type }) => {
 
                 </div>
             </div>
-            {/* <div className='list'>
-                <img width='100%' src='https://wpassets.brainstation.io/app/uploads/2017/04/13100509/Netflix-Background.jpg' alt='' />
-
-            </div> */}
         </>
     )
 }

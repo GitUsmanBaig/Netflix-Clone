@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import Particles from 'react-particles';
 import './dashboard.scss';
 import Navbar from './dashboardnavbar/DashboardNavbar';
 import SortingTable from '../Table/SortingTable';
@@ -10,6 +11,20 @@ import { toast } from 'react-toastify'
 import BarChart from '../Charts/BarChart';
 import DoughnutChart from '../Charts/DoughnutChart';
 
+const SideBarButtons = ({ name, setButtonName }) => {
+  return (<>
+    <li>
+      <button
+        className='button'
+        onClick={() => {
+          setButtonName(name);
+        }}
+      >
+        {name}
+      </button>
+    </li>
+  </>)
+}
 const Dashboard = () => {
 
   const navigate = useNavigate();
@@ -17,6 +32,8 @@ const Dashboard = () => {
   const [buttonName, setButtonName] = useState('Home');
   const [tabledata, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [totalmovies, setTotalMovies] = useState(0);
+  const [totalusers, setTotalUsers] = useState(0);
 
   const handleDelete = async (id) => {
     try {
@@ -58,8 +75,52 @@ const Dashboard = () => {
     }
   }
 
+  const totalMovies = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/countmovie', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      const res = await response.json();
+      if (res.status === 200) {
+        setTotalMovies(res.data[0].TOTAL_MOVIE
+        );
+      } else {
+        toast.error('Cannot Find Data');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
+
+  const totalUsers = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/countusers', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      const res = await response.json();
+      if (res.status === 200) {
+        setTotalUsers(res.data[0].TOTAL_USERS);
+      } else {
+        toast.error('Cannot Find Data');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
+
 
   useEffect(() => {
+    // totalMovies();
     if (buttonName === 'Users') {
       handleUserData();
     }
@@ -69,6 +130,8 @@ const Dashboard = () => {
     else if (buttonName === 'Rating') {
       handleMovieData();
     }
+    totalMovies();
+    totalUsers();
   }, [buttonName]);
 
   const columns = useMemo(() => {
@@ -184,6 +247,7 @@ const Dashboard = () => {
     }
   };
 
+
   return (
     <div>
       <div className='dashboard'>
@@ -193,43 +257,36 @@ const Dashboard = () => {
         <div className='row'>
           <div className='col-4'>
             <ul className='unorderedlist'>
-              <li>
+              {/* <li>
                 <button className='button' onClick={() => {
                   setButtonName('Home');
                 }}>Home</button>
-              </li>
-              <li>
-                <button
-                  className='button'
-                  onClick={() => {
-                    setButtonName('Users');
-                  }}
-                >
-                  Users
-                </button>
-              </li>
-              <li>
-                <button
-                  className='button'
-                  onClick={() => {
-                    setButtonName('Movie');
-                  }}
-                >
-                  Movies
-                </button>
-              </li>
-              <li>
-                <button
-                  className='button'
-                  onClick={() => {
-                    setButtonName('Rating');
-                  }}
-                >
-                  Ratings
-                </button>
-              </li>
+              </li> */}
+              <SideBarButtons name="Home" setButtonName={setButtonName} />
+              <SideBarButtons name="Users" setButtonName={setButtonName} />
+              <SideBarButtons name="Movie" setButtonName={setButtonName} />
+              <SideBarButtons name="Rating" setButtonName={setButtonName} />
+        
             </ul>
           </div>
+          {buttonName === 'Home' && (
+            <div className='col-8'>
+              <div className='homecomponents'>
+                <div className='totalmovies'>
+                  {totalmovies && <span>
+                    Total Movies: {totalmovies}
+                  </span>}
+                </div>
+                <div className='totalusers'>
+                  {
+                    totalusers && <span>
+                      Total Users: {totalusers}
+                    </span>
+                  }
+                </div>
+              </div>
+            </div>
+          )}
           {buttonName === 'Users' && (
             <div className='col-8'>
               {loading ? (
@@ -268,17 +325,17 @@ const Dashboard = () => {
               <div className='col-8'>
                 {loading ? (
                   <div className='loading'>Loading...</div>
-                ):(
+                ) : (
                   <>
-                  <span className='chartname'> Bar Chart</span>
-                  <div className='BarChart'>
-                    {/* <h1>Bar Chart</h1> */}
-                    <BarChart />
-                  </div>
-                  <span className='chartname'> Doughnut Chart</span>
-                  <div className='DoughnutChart'>
-                    <DoughnutChart/>
-                  </div>
+                    <span className='chartname'> Bar Chart</span>
+                    <div className='BarChart'>
+                      {/* <h1>Bar Chart</h1> */}
+                      <BarChart />
+                    </div>
+                    <span className='chartname'> Doughnut Chart</span>
+                    <div className='DoughnutChart'>
+                      <DoughnutChart />
+                    </div>
                   </>
                 )}
               </div>

@@ -24,7 +24,7 @@
 
     &:hover {
         width: 400px;
-        height: 310px;
+        height: 200px;
         position: absolute;
         top: -150px;
         border-radius: 5px;
@@ -57,14 +57,14 @@
             .itemInfoTop{
                 display: flex;
                 align-items: center;
-                margin-bottom: 10px;
+                margin-bottom: 0;
                 font-size: 14px;
                 font-weight: 600;
                 color: gray;
 
                 .Limit{
                     border: 1px solid gray;
-                    padding: 1px 3px;
+                    padding: 1px 1px;
                     margin: 0px 10px;
                 }
 

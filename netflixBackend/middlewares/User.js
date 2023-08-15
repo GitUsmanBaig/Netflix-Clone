@@ -139,3 +139,19 @@ exports.UpdateUser = (req,res) => {
         console.log(err);
     }
 }
+
+/*count total users*/
+exports.CountUsers = (req,res) =>{
+    try {
+        Conn.query('SELECT COUNT(*) AS TOTAL_USERS FROM users', (error, results) => {
+            if (error) {
+                return res.status(422).json({ data: [], message: "Cannot Find Users", status: 422 });
+            }
+            else{
+                return res.status(200).json({ data: results, message: "Total Users:", status: 200 });
+            }
+        });
+    }catch (err) {
+        console.log(err);
+    }
+}
